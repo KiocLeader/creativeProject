@@ -3,7 +3,7 @@
   <div class="modal-mask">
     <div class="modal-container">
       <form class="pure-form" @submit.prevent="upload">
-        <legend>Upload your Run</legend>
+        <legend>Upload a picture</legend>
         <fieldset>
           <input v-model="title" placeholder="Title">
         </fieldset>

@@ -15,6 +15,15 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   username: String,
   password: String,
+  favoriteDistance: String,
+  bio: String,
+  path: String,
+  mileTime: String,
+  fivekTime: String,
+  tenkTime: String,
+  halfTime: String,
+  marathonTime: String,
+  completed: Boolean
 });
 
 // This is a hook that will be called before a user record is saved,
@@ -193,7 +202,7 @@ router.get('/', validUser, async (req, res) => {
 });
 
 // logout
-router.delete("/", validUser, async (req, res) => {
+router.delete('/', validUser, async (req, res) => {
   try {
     req.session = null;
     res.sendStatus(200);
@@ -202,6 +211,30 @@ router.delete("/", validUser, async (req, res) => {
     return res.sendStatus(500);
   }
 });
+
+router.put('/', validUser, async (req, res) => {
+  try {
+    const updateUser = {
+      $set: {
+          favoriteDistance: req.body.favoriteDistance,
+          bio: req.body.bio,
+          mileTime: req.body.mileTime,
+          fivekTime: req.body.fivekTime,
+          tenkTime: req.body.tenkTime,
+          halfTime: req.body.halfTime,
+          marathonTime: req.body.marathonTime,
+          completed: req.body.completed
+      }
+    }
+    const filter = {_id: req.user.id};
+    const options = { upsert: true};
+    const result = await User.updateOne(filter, updateUser,options);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+})
 
 
 module.exports = {
