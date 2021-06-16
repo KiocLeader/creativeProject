@@ -1,19 +1,19 @@
 <template>
-<div class="home">
-  <Login v-if="user" />
-  <Uploader v-else />
+<div class="dashboard">
+  <Profile v-if="user" />
+  <Login v-else />
 </div>
 </template>
 
 <script>
 import Login from '@/components/Login.vue';
-import Uploader from '@/components/Uploader.vue';
+import Profile from '@/components/Profile.vue';
 import axios from 'axios';
 export default {
-  name: 'home',
+  name: 'dashboard',
   components: {
-    Uploader,
     Login,
+    Profile,
   },
   async created() {
     try {
