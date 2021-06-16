@@ -23,7 +23,6 @@ const userSchema = new mongoose.Schema({
   tenkTime: String,
   halfTime: String,
   marathonTime: String,
-  completed: Boolean
 });
 
 // This is a hook that will be called before a user record is saved,
@@ -135,7 +134,14 @@ router.post('/', async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      favoriteDistance: "Favorite Distance",
+      bio: "Bio",
+      mileTime: "Mile Time",
+      fivekTime: "5k Time",
+      tenkTime: "10k Time",
+      halfTime: "Half Marathon Time",
+      marathonTime: "Marathon Time",
     });
     await user.save();
     // set user session info
@@ -223,7 +229,6 @@ router.put('/', validUser, async (req, res) => {
           tenkTime: req.body.tenkTime,
           halfTime: req.body.halfTime,
           marathonTime: req.body.marathonTime,
-          completed: req.body.completed
       }
     }
     const filter = {_id: req.user.id};

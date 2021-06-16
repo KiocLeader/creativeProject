@@ -5,36 +5,44 @@
     <h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>
     <Uploader :show="show" @close="close" @uploadFinished="uploadFinished" />
   </div>
+  <form class="profile">
+  <br>
+  <br>
+  <p><strong>Profile</strong></p>
+  <hr>
+    <p>{{user.firstName}} {{user.lastName}}</p>
+    <p> {{user.bio}}</p>
+    <p>Favorite Distance: {{user.favoriteDistance}}</p>
+    <p>Mile Time: {{user.mileTime}}</p>
+    <p>5k Time: {{user.fivekTime}}</p>
+    <p>10K Time: {{user.tenkTime}}</p>
+    <p>Half Marathon Time: {{user.halfTime}}</p>
+    <p>Marathon Time: {{user.marathonTime}}</p>
+  </form>
+
   <div class="heroBox">
     <form class="pure-form">
       <fieldset>
-        <legend>Profile</legend>
-        <input placeholder="favorite Distance" v-model="favoriteDistance">
+        <input placeholder="Favorite Distance" v-model="favoriteDistance">
         <input placeholder="Bio" v-model="bio">
       </fieldset>
       <fieldset>
-        <input placeholder="mile Time" v-model="mileTime">
-        <input placeHolder="5K Time" v-model="fivekTime">
+        <input placeholder="Mile Time" v-model="mileTime">
+        <input placeHolder="5k Time" v-model="fivekTime">
       </fieldset>
       <fieldset>
-        <input placeholder="10K Time" v-model="tenkTime">
-        <input placeHolder="Half Time" v-model="halfTime">
+        <input placeholder="10k Time" v-model="tenkTime">
+        <input placeHolder="Half Marathon Time" v-model="halfTime">
       </fieldset>
       <fieldset>
         <input placeholder="Marathon Time" v-model="marathonTime">
-        <div class="imageInput" @click="chooseImage">
-            <img v-if="url" :src="url" />
-            <div v-if="!url" class="placeholder">
-              Choose a Profile Picture
-            </div>
-            <input class="fileInput" ref="fileInput" type="file" @input="fileChanged">
-          </div>
       </fieldset>
       <fieldset>
         <button type="submit" class="pure-button pure-button-primary" @click.prevent="updateInfo">update Info</button>
       </fieldset>
     </form>
   </div>
+
   <p v-if="error">{{error}}</p>
 </div>
 </template>
@@ -61,8 +69,6 @@ export default {
       tenkTime: '',
       halfTime: '',
       marathonTime: '',
-      url: '',
-      file: null,
     }
   },
   created() {
@@ -70,7 +76,7 @@ export default {
   computed: {
     user() {
       return this.$root.$data.user;
-    },
+    }
   },
   methods: {
     async logout() {
@@ -89,7 +95,6 @@ export default {
     },
     async uploadFinished() {
       this.show = false;
-      this.getPhotos();
     },
     async updateInfo() {
       try {
@@ -102,20 +107,20 @@ export default {
           fivekTime: this.fivekTime,
           tenkTime: this.tenkTime,
           halfTime: this.halfTime,
-          marathonTime: this.halfTime,
-          completed: true
+          marathonTime: this.marathonTime,
         });
         this.info = false;
+        this.$root.$data.user.bio = this.bio;
+        this.$root.$data.user.favoriteDistance = this.favoriteDistance;
+        this.$root.$data.user.mileTime = this.mileTime;
+        this.$root.$data.user.fivekTime = this.fivekTime;
+        this.$root.$data.user.tenkTime = this.tenkTime;
+        this.$root.$data.user.halfTime = this.halfTime;
+        this.$root.$data.user.marathonTime = this.marathonTime;
+        return this.$root.$data.user;
       } catch (error) {
         this.error = error.response.data.message;
       }
-    },
-    fileChanged(event) {
-      this.file = event.target.files[0];
-      this.url = URL.createObjectURL(this.file);
-    },
-    chooseImage() {
-      this.$refs.fileInput.click()
     },
   }
 }
@@ -127,7 +132,7 @@ export default {
   justify-content: space-between;
 }
 
-.hero {
+.hero  {
   display: flex;
   justify-content: center;
 }
@@ -149,35 +154,15 @@ export default {
   font-size: 14px;
 }
 
-.placeholder {
-  background: #F0F0F0;
-  width: 200px;
-  height: 125px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
+.profile {
+  font-size: 18px;
+  text-align: center;
 }
 
-.placeholder:hover {
-  background: #E0E0E0;
-}
 
-.fileInput {
-  display: none;
-}
 
-.imageInput {
-  display: flex;
-  justify-content: center;
-}
 
-img {
-  width: 200px;
 
-}
 
 
 </style>
