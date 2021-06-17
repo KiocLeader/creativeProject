@@ -7,38 +7,32 @@ const users = require("./users.js");
 const User = users.model;
 const validUser = users.valid;
 
-const runSchema = new mongoose.Schema({
+const resourceSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
-  distance: String,
+  url: String,
   title: String,
   description: String,
-  time: String,
-  avgPace: String,
-  avgHR: String,
   created: {
     type: Date,
     default: Date.now
   },
 });
 
-const Run = mongoose.model('Run', runSchema);
+const Resource = mongoose.model('Resource', resourceSchema);
 
 
 router.post("/", validUser, async (req, res) => {
   try {
-    const run = new Run({
+    const resource = new Resource({
       user: req.user,
-      distance: req.body.distance,
       title: req.body.title,
       description: req.body.description,
-      time: req.body.time,
-      avgPace: req.body.avgPace,
-      avgHR: req.body.avgHR
+      url: req.body.url,
     });
-    await run.save();
+    await resource.save();
     return res.sendStatus(200);
   } catch (error) {
     console.log(error);
@@ -47,26 +41,12 @@ router.post("/", validUser, async (req, res) => {
 });
 
 
-router.get("/", validUser, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    let runs = await Run.find({
-      user: req.user
-    }).sort({
+    let resources = await Resource.find().sort({
       created: -1
     }).populate('user');
-    return res.send(runs);
-  } catch (error) {
-    console.log(error);
-    return res.sendStatus(500);
-  }
-});
-
-router.get("/all", async (req, res) => {
-  try {
-    let runs = await Run.find().sort({
-      created: -1
-    }).populate('user');
-    return res.send(runs);
+    return res.send(resources);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
@@ -76,6 +56,6 @@ router.get("/all", async (req, res) => {
 
 
 module.exports = {
-  model: Run,
+  model: Resource,
   routes: router,
 }

@@ -5,10 +5,10 @@
       <div class="subtitle"><h1>Become "Your" Best</h1></div>
       <nav>
         <router-link to="/"><i class="fas fa-user"></i></router-link>
-        <router-link to="/runs"><i class="fas fa-running"></i></router-link>
-        <router-link to="/Graphs"><i class="fas fa-crown"></i></router-link>
-        <router-link to="/resources"><i class="fas fa-book-open"></i></router-link>
-        <button type="button" a @click="logout" class="fas fa-sign-out-alt"><router-link to="/"></router-link></button>
+        <router-link to="/user"><i class="fas fa-running"></i></router-link>
+        <router-link to="/global"><i class="fas fa-crown"></i></router-link>
+        <router-link to="/resource"><i class="fas fa-book-open"></i></router-link>
+        <button type="button" a @click="logout" class="fas fa-sign-out-alt"></button>
       </nav>
     </header>
     <router-view />

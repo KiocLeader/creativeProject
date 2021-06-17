@@ -3,7 +3,10 @@
   <form class="profile">
   <br>
   <br>
-  <p><strong>Profile</strong></p>
+  <br>
+  <br>
+  <br>
+  <font size="+2"><p><strong>Profile</strong></p></font>
   <hr>
     <p>{{user.firstName}} {{user.lastName}}</p>
     <p> {{user.bio}}</p>

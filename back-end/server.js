@@ -35,6 +35,8 @@ const users = require("./users.js");
 app.use("/api/users", users.routes);
 const runs = require("./runs.js");
 app.use("/api/runs", runs.routes);
+const resources = require("./resource.js");
+app.use("/api/resources", resources.routes);
 
 
 app.listen(3002, () => console.log('Server listening on port 3002!'));

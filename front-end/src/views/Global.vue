@@ -1,25 +1,8 @@
 <template>
   <div class="layout">
-      <form class="pure-form" @submit.prevent="upload">
-        <legend>Upload your Run</legend>
-        <fieldset>
-          <input v-model="title" placeholder="Title">
-        </fieldset>
-        <fieldset>
-          <textarea v-model="description" placeholder="Description"></textarea>
-        </fieldset>
-        <fieldset>
-          <input placeholder="Distance" v-model="distance">
-          <input placeholder="Time" v-model="time">
-          <input placeholder="Average Pace" v-model="avgPace">
-          <input placeholder="Average HR" v-model="avgHR">
-        </fieldset>
-        <fieldset class="buttons">
-          <button type="submit" class="pure-button pure-button-primary right">Upload</button>
-        </fieldset>
-      </form>
       <div class="myRuns" v-for="run in runs" v-bind:key="run._id">
           <hr>
+          <p> {{run.user.firstName}} {{run.user.lastName}}</p>
           <p>Title: {{run.title}}</p>
           <p>Description: {{run.description}}</p>
           <p>Time: {{run.time}} Distance: {{run.distance}} Miles</p>
@@ -33,7 +16,7 @@
 import axios from 'axios';
 import moment from 'moment';
 export default {
-  name: 'Runs',
+  name: 'Global',
   data() {
     return {
       title: '',
@@ -57,30 +40,9 @@ export default {
   formatDate(date) {
       return moment(date).format('MMMM Do YYYY, h:mm:ss a');
     },
-    async upload() {
-      try {
-        await axios.post("/api/runs", {
-          title: this.title,
-          description: this.description,
-          distance: this.distance,
-          time: this.time,
-          avgPace: this.avgPace,
-          avgHR: this.avgHR
-        });
-        this.title = "";
-        this.description = "";
-        this.distance = "";
-        this.time = "";
-        this.avgPace = "";
-        this.avgHR = "";
-        this.getRuns();
-      } catch (error) {
-        this.error = "Error: " + error.response.data.message;
-      }
-    },
     async getRuns() {
       try {
-        this.response = await axios.get("/api/runs");
+        this.response = await axios.get("/api/runs/all");
         this.runs = this.response.data;
       } catch (error) {
         this.error = error.response.data.message;
@@ -107,7 +69,10 @@ input {
 
 legend {
   font-size: 18px;
+}
 
+.myRuns {
+  text-align: center;
 }
 
 textarea {
@@ -127,13 +92,9 @@ textarea {
 }
 
 .myRuns {
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
-
-legend {
-  text-align: center;
-}
-
 
 
 .buttons {

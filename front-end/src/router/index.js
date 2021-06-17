@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Dashboard from '../views/Dashboard.vue'
-import Runs from '../components/Runs.vue'
+import User from '../views/User.vue'
+import Global from '../views/Global.vue'
+import Resource from '../views/Resource.vue'
 
 
 Vue.use(VueRouter)
@@ -14,9 +16,19 @@ const routes = [
     component: Dashboard
   },
   {
-    path: '/runs',
-    name: 'Runs',
-    component: Runs
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
+    path: '/global',
+    name: 'Global',
+    component: Global
+  },
+  {
+    path: '/resource',
+    name: 'Resource',
+    component: Resource
   }
 ]
 
