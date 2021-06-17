@@ -1,5 +1,5 @@
 <template>
-<div class="dashboard">
+<div class="resource">
   <Training v-if="user" />
   <Login v-else />
 </div>
