@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
-      <div class="myRuns" v-for="run in runs" v-bind:key="run._id">
+    <h1>Running around the world</h1>
+      <div class="allRuns" v-for="run in runs" v-bind:key="run._id">
           <hr>
           <p> {{run.user.firstName}} {{run.user.lastName}}</p>
           <p>Title: {{run.title}}</p>
@@ -59,46 +60,15 @@ export default {
   align-items: center;
   padding: 135px 0px 50px 0px;
 }
-form {
-  font-size: 11pt;
-}
 
-input {
-  width: 100%;
-}
-
-legend {
-  font-size: 18px;
-}
-
-.myRuns {
+h1 {
   text-align: center;
 }
 
-textarea {
-  width: 100%;
-  height: 100px;
-}
-
-.placeholder {
-  background: #F0F0F0;
-  width: 200px;
-  height: 125px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-size: 14px;
-}
-
-.myRuns {
+.allRuns {
+  text-align: center;
   justify-content: center;
   align-items: center;
 }
 
-
-.buttons {
-  display: flex;
-  justify-content: center;
-}
 </style>

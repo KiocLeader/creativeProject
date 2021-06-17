@@ -103,16 +103,18 @@ form {
 
 input {
   width: 100%;
+  text-align: center;
 }
 
 legend {
   font-size: 18px;
-
+  text-align: center;
 }
 
 textarea {
   width: 100%;
-  height: 100px;
+  height: 50px;
+  text-align: center;
 }
 
 .placeholder {
@@ -129,12 +131,6 @@ textarea {
 .myRuns {
   text-align: center;
 }
-
-legend {
-  text-align: center;
-}
-
-
 
 .buttons {
   display: flex;

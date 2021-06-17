@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.dashboard {
+.resource {
   padding-top: 10px;
 }
 

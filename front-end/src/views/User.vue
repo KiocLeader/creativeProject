@@ -1,5 +1,5 @@
 <template>
-<div class="dashboard">
+<div class="user">
   <Runs v-if="user" />
   <Login v-else />
 </div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.dashboard {
+.user {
   padding-top: 10px;
 }
 

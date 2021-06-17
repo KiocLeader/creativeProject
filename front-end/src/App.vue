@@ -6,14 +6,14 @@
       <nav>
         <router-link to="/"><i class="fas fa-user"></i></router-link>
         <router-link to="/user"><i class="fas fa-running"></i></router-link>
-        <router-link to="/global"><i class="fas fa-crown"></i></router-link>
+        <router-link to="/global"><i class="fas fa-globe-americas"></i></router-link>
         <router-link to="/resource"><i class="fas fa-book-open"></i></router-link>
         <button type="button" a @click="logout" class="fas fa-sign-out-alt"></button>
       </nav>
     </header>
     <router-view />
     <div class='footer'>
-      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a></p>
+      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a> Total time: 21.5 Hours</p>
     </div>
   </div>
 </template>
@@ -54,16 +54,14 @@ body {
   margin: 0 1em 1em 0;
   height: 120px;
   width: 1200px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  /* Fixed position */
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
   position: fixed;
   z-index: 10000;
   left: 50%;
   transform: translate(-50%, 0);
-  /* Color and alignment */
   background: #277EAE;
   text-align: center;
 
@@ -100,19 +98,20 @@ h2 {
 
 .pure-button-primary {
   background-color: #277EAE;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
 }
 .footer {
   text-align: center;
-  background-color: #277EAE;  /* Blue */
+  color: #fff;
+  background-color: #277EAE;
   padding: 2px 0;
   width: 1200px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
 }
 </style>
