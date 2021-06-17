@@ -73,6 +73,19 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+    console.log(req.params);
+  try {
+      await Run.deleteOne({
+        _id: req.params.id
+      });
+      return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+});
+
 
 
 module.exports = {

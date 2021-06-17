@@ -25,6 +25,7 @@
           <p>Time: {{run.time}} Distance: {{run.distance}} Miles</p>
           <p> Average Pace: {{run.avgPace}} Average HR: {{run.avgHR}}bpm</p>
           <p>{{formatDate(run.created)}}</p>
+          <button type="submit" class="pure-button pure-button-primary right" @click.prevent="deleteRun(run._id)">Delete</button>
       </div>
   </div>
 </template>
@@ -76,6 +77,15 @@ export default {
         this.getRuns();
       } catch (error) {
         this.error = "Error: " + error.response.data.message;
+      }
+    },
+    async deleteRun(runId) {
+    console.log(runId);
+      try {
+          await axios.delete("/api/runs/" + runId);
+          this.getRuns();
+      } catch (error) {
+          this.error = error.response.data.message;
       }
     },
     async getRuns() {

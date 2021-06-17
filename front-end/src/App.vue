@@ -13,7 +13,7 @@
     </header>
     <router-view />
     <div class='footer'>
-      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a> Total time: 21.5 Hours</p>
+      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a> Total time: 22 Hours</p>
     </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
   name: 'App',
   methods: {
     async logout() {
-    debugger
       try {
         await axios.delete("/api/users");
         this.$root.$data.user = null;
