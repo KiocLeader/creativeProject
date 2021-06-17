@@ -13,7 +13,7 @@
     </header>
     <router-view />
     <div class='footer'>
-      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a> Total time: 22 Hours</p>
+      <p><a href="https://github.com/KiocLeader/creativeProject">Github repository</a> Total time: 23 Hours</p>
     </div>
   </div>
 </template>
