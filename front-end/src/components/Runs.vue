@@ -1,6 +1,5 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-container">
+  <div class="layout">
       <form class="pure-form" @submit.prevent="upload">
         <legend>Upload your Run</legend>
         <fieldset>
@@ -16,21 +15,26 @@
           <input placeholder="Average HR" v-model="avgHR">
         </fieldset>
         <fieldset class="buttons">
-          <button type="button" @click="close" class="pure-button">Close</button>
           <button type="submit" class="pure-button pure-button-primary right">Upload</button>
         </fieldset>
       </form>
-    </div>
+      <div class="myRuns" v-for="run in runs" v-bind:key="run._id">
+          <hr>
+          <p>Title: {{run.title}}</p>
+          <p>Description: {{run.description}}</p>
+          <p>Time: {{run.time}} Distance: {{run.distance}} Miles</p>
+          <p> Average Pace: {{run.avgPace}} Average HR: {{run.avgHR}}bpm</p>
+          <p>{{formatDate(run.created)}}</p>
+      </div>
   </div>
+
 </template>
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 export default {
-  name: 'Uploader',
-  props: {
-    show: Boolean,
-  },
+  name: 'Runs',
   data() {
     return {
       title: '',
@@ -39,11 +43,20 @@ export default {
       time: '',
       avgPace: '',
       avgHR: '',
+      runs:{},
+    }
+  },
+  created() {
+    this.getRuns();
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
     }
   },
   methods: {
-    close() {
-      this.$emit('close');
+  formatDate(date) {
+      return moment(date).format('d MMMM YYYY');
     },
     async upload() {
       try {
@@ -61,74 +74,41 @@ export default {
         this.time = "";
         this.avgPace = "";
         this.avgHR = "";
-        this.$emit('uploadFinished');
+        this.getRuns();
       } catch (error) {
         this.error = "Error: " + error.response.data.message;
       }
-    }
+    },
+    async getRuns() {
+      try {
+        this.response = await axios.get("/api/runs");
+        this.runs = this.response.data;
+      } catch (error) {
+        this.error = error.response.data.message;
+      }
+    },
   }
 }
 </script>
 
 <style scoped>
-/* Modals */
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .3);
-  transition: opacity 0.5s ease;
-  display: flex;
-  transition: background 0.2s ease-in-out, height 1s ease-in-out;
-  transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+
+.layout {
   justify-content: center;
-  transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+  align-items: center;
+  padding: 135px 0px 50px 0px;
 }
-
-.modal-container {
-  width: 50%;
-  height: max-content;
-  margin-top: 80px;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all 0.5s ease;
-}
-
-/*
-* The following styles are auto-applied to elements with
-* transition="modal" when their visibility is toggled
-* by Vue.js.
-*
-* You can easily play with the modal transition by editing
-* these styles.
-*/
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-/* Form */
-
 form {
   font-size: 11pt;
 }
 
 input {
   width: 100%;
+}
+
+legend {
+  font-size: 18px;
+
 }
 
 textarea {
@@ -145,23 +125,16 @@ textarea {
   align-items: center;
   color: #333;
   font-size: 14px;
-  cursor: pointer;
 }
 
-.placeholder:hover {
-  background: #E0E0E0;
+.myRuns {
+  justify-content: center;
+  align-items: center;
 }
 
-.fileInput {
-  display: none;
-}
-
-img {
-  width: 200px;
-}
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 </style>

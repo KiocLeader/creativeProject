@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Dashboard from '../views/Dashboard.vue'
-import Uploader from '../components/Uploader.vue'
+import Runs from '../components/Runs.vue'
 
 
 Vue.use(VueRouter)
@@ -14,9 +14,9 @@ const routes = [
     component: Dashboard
   },
   {
-    path: '/uploader',
-    name: 'Uploader',
-    component: Uploader
+    path: '/runs',
+    name: 'Runs',
+    component: Runs
   }
 ]
 

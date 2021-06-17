@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>Runner's Connect</h1>
-      <h1>Become "Your" Best</h1>
+      <div class="title"><h1>Runner's Connect</h1></div>
+      <div class="subtitle"><h1>Become "Your" Best</h1></div>
       <nav>
         <router-link to="/"><i class="fas fa-user"></i></router-link>
-        <router-link to="/uploader"><i class="fas fa-running"></i></router-link>
-        <router-link to="/Graphs"><i class="fas fa-globe-americas"></i></router-link>
+        <router-link to="/runs"><i class="fas fa-running"></i></router-link>
+        <router-link to="/Graphs"><i class="fas fa-crown"></i></router-link>
+        <router-link to="/resources"><i class="fas fa-book-open"></i></router-link>
         <button type="button" a @click="logout" class="fas fa-sign-out-alt"><router-link to="/"></router-link></button>
       </nav>
     </header>
@@ -45,6 +46,10 @@ body {
   background-color: #ffe;
 }
 
+.subtitle {
+  font-size: 1pt;
+}
+
 #header {
   margin: 0 1em 1em 0;
   height: 120px;
@@ -69,10 +74,16 @@ nav {
   justify-content: center;
 }
 
-h1 {
+.title {
   color: #fff;
-  font-size: 18px;
+  font-size: 11px;
 }
+
+.subtitle {
+  color: #fff;
+  font-size: 9px;
+}
+
 
 h2 {
   font-size: 12px;

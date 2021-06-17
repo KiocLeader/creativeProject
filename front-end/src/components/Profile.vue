@@ -1,7 +1,5 @@
 <template>
 <div class="main">
-  <div class="menu">
-  </div>
   <form class="profile">
   <br>
   <br>
@@ -115,10 +113,6 @@ export default {
 </script>
 
 <style scoped>
-.menu {
-  display: flex;
-  justify-content: space-between;
-}
 
 .hero  {
   display: flex;

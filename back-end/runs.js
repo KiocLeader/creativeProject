@@ -48,14 +48,13 @@ router.post("/", validUser, async (req, res) => {
 
 
 router.get("/", validUser, async (req, res) => {
-
   try {
-    let photos = await Photo.find({
+    let runs = await Run.find({
       user: req.user
     }).sort({
       created: -1
     }).populate('user');
-    return res.send(photos);
+    return res.send(runs);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
