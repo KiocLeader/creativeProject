@@ -1,9 +1,6 @@
 <template>
 <div class="main">
   <div class="menu">
-    <p><a @click="toggleUpload"><i class="fas fa-running"></i></a></p>
-    <h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>
-    <Uploader :show="show" @close="close" @uploadFinished="uploadFinished" />
   </div>
   <form class="profile">
   <br>
@@ -49,11 +46,9 @@
 
 <script>
 import axios from 'axios';
-import Uploader from '@/components/Uploader.vue';
 export default {
   name: 'Profile',
   components: {
-    Uploader
  },
   data() {
     return {
@@ -79,14 +74,7 @@ export default {
     }
   },
   methods: {
-    async logout() {
-      try {
-        await axios.delete("/api/users");
-        this.$root.$data.user = null;
-      } catch (error) {
-        this.$root.$data.user = null;
-      }
-    },
+
     close() {
      this.show = false;
     },

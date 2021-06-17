@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>Runners Connect</h1>
+      <h1>Runner's Connect</h1>
+      <h1>Become "Your" Best</h1>
       <nav>
-        <router-link to="/"><i class="fas fa-home"></i></router-link>
-        <router-link to="/dashboard"><i class="fas fa-user"></i></router-link>
+        <router-link to="/"><i class="fas fa-user"></i></router-link>
+        <router-link to="/uploader"><i class="fas fa-running"></i></router-link>
         <router-link to="/Graphs"><i class="fas fa-globe-americas"></i></router-link>
+        <button type="button" a @click="logout" class="fas fa-sign-out-alt"><router-link to="/"></router-link></button>
       </nav>
     </header>
     <router-view />
@@ -15,26 +17,42 @@
   </div>
 </template>
 
+<script>
+import axios from 'axios';
+export default {
+  name: 'App',
+  methods: {
+    async logout() {
+    debugger
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
+  }
+}
+</script>
+
 <style>
-/* Color scheme: https://paletton.com/#uid=7040u0knHs+edG7jrvYscpiuCk2 */
-/* red: #e74c3c
- * blue: #277EAE
- */
+
 body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   font-weight: 300;
-  font-size: 13pt;
+  font-size: 14pt;
   margin: 0px 200px;
   background-color: #ffe;
 }
 
 #header {
-  /* Semi-circle */
   margin: 0 1em 1em 0;
-  height: 100px;
-  width: 200px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  height: 120px;
+  width: 1200px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
   /* Fixed position */
   position: fixed;
   z-index: 10000;
@@ -43,7 +61,7 @@ body {
   /* Color and alignment */
   background: #277EAE;
   text-align: center;
-  box-shadow: 0 0 0 1em #ffe;
+
 }
 
 nav {
@@ -60,18 +78,30 @@ h2 {
   font-size: 12px;
 }
 
-#header .fas {
+#header .fas  {
   font-size: 25px;
   color: #fff;
   width: 50px;
+  background-color: #277EAE;
+  border: none;
 }
+
 
 .pure-button-primary {
   background-color: #277EAE;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 .footer {
   text-align: center;
   background-color: #277EAE;  /* Blue */
   padding: 2px 0;
+  width: 1200px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 </style>

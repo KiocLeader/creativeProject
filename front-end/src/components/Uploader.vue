@@ -1,5 +1,4 @@
 <template>
-<transition v-if="show" name="modal">
   <div class="modal-mask">
     <div class="modal-container">
       <form class="pure-form" @submit.prevent="upload">
@@ -23,7 +22,6 @@
       </form>
     </div>
   </div>
-</transition>
 </template>
 
 <script>
@@ -49,16 +47,14 @@ export default {
     },
     async upload() {
       try {
-        const formData = new FormData();
-        formData.append('title', this.title);
-        formData.append('description', this.description);
-        formData.append('distance', this.distance);
-        formData.append('time', this.time);
-        formData.append('avgPace', this.avgPace);
-        formData.append('avgHR', this.avgHR);
-        await axios.post("/api/runs", formData);
-        this.file = null;
-        this.url = "";
+        await axios.post("/api/runs", {
+          title: this.title,
+          description: this.description,
+          distance: this.distance,
+          time: this.time,
+          avgPace: this.avgPace,
+          avgHR: this.avgHR
+        });
         this.title = "";
         this.description = "";
         this.distance = "";
